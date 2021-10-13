@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "incremental": true,
+    "composite": true,
+    "declaration": true,
+    "sourceMap": true,
+    "declarationMap": true,
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "ES2020",
+    "moduleResolution": "node",
+    "types": ["node", "mocha"],
+    "lib": ["ES2020"],
+    "plugins": [
+      { "transform": "typescript-transform-paths" },
+      { "transform": "typescript-transform-paths", "afterDeclarations": true }
+    ],
+    "baseUrl": "./",
+    "paths": {
+      "mocha-slonik/*": ["src/*"],
+      "@tests/*": ["tests/*"]
+    }
+  },
+  "references": [{ "path": "./src" }]
+}
