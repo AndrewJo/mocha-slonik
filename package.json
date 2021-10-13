@@ -1,0 +1,29 @@
+{
+  "name": "mocha-slonik",
+  "version": "1.0.0",
+  "description": "Slonik transaction support for Mocha test framework",
+  "main": "index.ts",
+  "scripts": {
+    "test": "mocha --recursive tests/**/*.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndrewJo/mocha-slonik.git"
+  },
+  "keywords": [
+    "nodejs",
+    "javascript",
+    "typescript",
+    "postgresql",
+    "postgres",
+    "testing",
+    "test",
+    "mocha"
+  ],
+  "author": "Andrew Jo <andrewjo@gmail.com>",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/AndrewJo/mocha-slonik/issues"
+  },
+  "homepage": "https://github.com/AndrewJo/mocha-slonik#readme"
+}
