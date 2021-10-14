@@ -1,5 +1,7 @@
 .*
 
+*.tsbuildinfo
+
 *.json
 *.yaml
 
