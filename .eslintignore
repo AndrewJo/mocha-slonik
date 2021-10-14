@@ -1,0 +1,5 @@
+.circleci/
+.github/
+.vscode/
+coverage/
+dist/
