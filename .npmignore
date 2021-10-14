@@ -1,0 +1,13 @@
+.*
+
+*.json
+*.yaml
+
+*.tgz
+*.tar
+*.gz
+*.xz
+
+coverage/
+src/
+tests/
