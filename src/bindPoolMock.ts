@@ -9,7 +9,7 @@ import {
   TaggedTemplateLiteralInvocationType,
 } from "slonik/dist/src/types";
 
-type BindPoolFunction = (
+export type BindPoolFunction = (
   parentLog: Logger,
   pool: InternalDatabasePoolType,
   clientConfiguration: ClientConfigurationType
