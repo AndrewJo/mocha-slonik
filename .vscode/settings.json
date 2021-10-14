@@ -1,0 +1,12 @@
+{
+  // Editor
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // Files
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+
+  // TypeScript
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
