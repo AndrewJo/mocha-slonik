@@ -15,7 +15,7 @@ export type BindPoolFunction = (
   clientConfiguration: ClientConfigurationType
 ) => DatabasePoolType;
 
-export default class BindPoolMock extends EventEmitter {
+export class BindPoolMock extends EventEmitter {
   protected transaction: DatabaseTransactionConnectionType;
 
   protected getOrCreateTransaction(
@@ -164,3 +164,5 @@ export default class BindPoolMock extends EventEmitter {
     };
   }
 }
+
+export default BindPoolMock;
