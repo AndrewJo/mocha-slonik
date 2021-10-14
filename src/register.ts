@@ -9,16 +9,12 @@ let bindPoolImportMock: OtherManager<BindPoolFunction>;
 export const mochaHooks: RootHookObject = {
   beforeAll() {
     bindPoolMock = new BindPoolMock();
-    bindPoolImportMock = ImportMock.mockOther(
-      bindPool,
-      "bindPool",
-      bindPoolMock.bindPool()
-    );
+    bindPoolImportMock = ImportMock.mockOther(bindPool, "bindPool", bindPoolMock.bindPool());
   },
   afterEach() {
     bindPoolMock.rollback();
   },
   afterAll() {
     bindPoolImportMock.restore();
-  }
+  },
 };

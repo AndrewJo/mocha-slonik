@@ -29,9 +29,7 @@ export class BindPoolMock extends EventEmitter {
         return resolve(this.transaction);
       }
 
-      const wrappedTransactionHandler = (
-        transaction: DatabaseTransactionConnectionType
-      ) =>
+      const wrappedTransactionHandler = (transaction: DatabaseTransactionConnectionType) =>
         new Promise((_, innerReject) => {
           this.transaction = transaction;
 
@@ -68,6 +66,10 @@ export class BindPoolMock extends EventEmitter {
     this.emit("rollback");
   }
 
+  /**
+   * Returns a mocked bindPool function that returns a DatabasePool object that wraps all methods
+   * in a transaction.
+   */
   public bindPool(): BindPoolFunction {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const that = this;
@@ -75,9 +77,7 @@ export class BindPoolMock extends EventEmitter {
       function wrapTransaction(targetMethodName: string) {
         return async function (query: TaggedTemplateLiteralInvocationType) {
           if (typeof query === "string") {
-            throw new TypeError(
-              "Query must be constructed using `sql` tagged template literal."
-            );
+            throw new TypeError("Query must be constructed using `sql` tagged template literal.");
           }
 
           const transaction = await that.getOrCreateTransaction(
@@ -101,11 +101,7 @@ export class BindPoolMock extends EventEmitter {
           );
           return connectionHandler(transaction);
         },
-        async copyFromBinary(
-          _copyQuery,
-          _values,
-          _columnTypes
-        ): Promise<Record<string, unknown>> {
+        async copyFromBinary(_copyQuery, _values, _columnTypes): Promise<Record<string, unknown>> {
           throw new Error("copyFromBinary is not supported in transactions.");
         },
         async end() {
@@ -153,11 +149,7 @@ export class BindPoolMock extends EventEmitter {
         query: wrapTransaction("query"),
         stream: wrapTransaction("stream"),
         async transaction(transactionHandler) {
-          const trx = await that.getOrCreateTransaction(
-            parentLog,
-            pool,
-            clientConfiguration
-          );
+          const trx = await that.getOrCreateTransaction(parentLog, pool, clientConfiguration);
           return trx.transaction(transactionHandler);
         },
       };
