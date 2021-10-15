@@ -134,7 +134,7 @@ export class BindPoolMock extends EventEmitter {
         exists: wrapTransaction("exists"),
         getPoolState(): PoolStateType {
           return {
-            activeConnectionCount: pool.totalCount - pool.idCount,
+            activeConnectionCount: pool.totalCount - pool.idleCount,
             ended: pool.slonik.ended,
             idleConnectionCount: pool.idleCount,
             waitingClientCount: pool.waitingCount,
