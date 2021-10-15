@@ -13,6 +13,8 @@ jobs:
     docker:
       - image: cimg/node:lts
       - image: circleci/postgres:13-ram
+        environment:
+          POSTGRES_PASSWORD: circleci_test
     working_directory: ~/mocha-slonik
     steps:
       - checkout
@@ -25,7 +27,7 @@ jobs:
           name: Run tests
           command: npm test
           environment:
-            DATABASE_URL: postgres://postgres@localhost:5432/circle_test
+            DATABASE_URL: postgres://postgres:circleci_test@localhost:5432/circle_test
   build:
     docker:
       - image: cimg/node:lts
