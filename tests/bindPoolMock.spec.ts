@@ -1,7 +1,7 @@
 import { env } from "process";
 import { expect, use } from "chai";
 import chaiAsPromised from "chai-as-promised";
-import { createPool, DatabasePoolType, NotFoundError, sql } from "slonik";
+import { createPool, DatabasePoolType, DatabaseTransactionConnectionType, NotFoundError, sql } from "slonik";
 
 use(chaiAsPromised);
 
@@ -19,12 +19,40 @@ describe("BindPoolMock", function () {
   });
 
   it("should wrap all database calls in transaction", async function () {
-    const actual = await pool.oneFirst(sql`INSERT INTO test (foo) VALUES (1) RETURNING foo;`);
+    const actual = await pool.connect(async (connection) => {
+      return connection.oneFirst(sql`INSERT INTO test (foo) VALUES (1) RETURNING foo;`);
+    });
     expect(actual).to.equal(1);
   });
 
   it("should rollback after each tests", function () {
     const actual = pool.one(sql`SELECT * FROM test;`);
     return expect(actual).to.be.rejectedWith(NotFoundError, "Resource not found.");
+  });
+
+  it("should reject wrapped methods if not using sql template literal", async function () {
+    const actual = pool.any("SELECT * FROM test;" as any);
+    return expect(actual).to.be.rejectedWith(TypeError, "Query must be constructed using `sql` tagged template literal.");
+  });
+
+  it("should wrap new pools in transaction", function () {
+    const pool2 = createPool("postgres://localhost:1234", {
+      interceptors: [
+        {
+          beforePoolConnection(ctx) {
+            return pool;
+          }
+        }
+      ],
+    });
+
+    return pool2.connect(async (connection) => {
+      await connection.query(sql`SELECT 1`);
+      expect(pool.getPoolState().activeConnectionCount).to.not.equal(pool2.getPoolState().activeConnectionCount);
+    });
+  });
+
+  it("should reject when copyFromBinary is called", function () {
+    return expect(pool.copyFromBinary(null, null, null)).to.be.rejectedWith(Error, "copyFromBinary is not supported in transactions.");
   });
 });
