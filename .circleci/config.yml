@@ -12,6 +12,7 @@ jobs:
   build:
     docker:
       - image: cimg/node:lts
+    working_directory: ~/mocha-slonik
     steps:
       - checkout
       - node/install-npm
@@ -31,6 +32,7 @@ jobs:
   publish:
     docker:
       - image: cimg/node:lts
+    working_directory: ~/mocha-slonik
     steps:
       - attach_workspace:
           at: ~/mocha-slonik
