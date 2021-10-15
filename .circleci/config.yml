@@ -28,8 +28,17 @@ jobs:
       - store_artifacts:
           path: package
           destination: .
+  publish:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - attach_workspace:
+          at: ~/mocha-slonik
 
 workflows:
-  build-and-deploy:
+  build-and-publish:
     jobs:
       - build
+      - publish:
+          requires:
+            - build
