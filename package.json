@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "Slonik transaction support for Mocha test framework",
   "main": "index.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./bindPoolMock": "./dist/bindPoolMock.js",
+    "./register": "./dist/register.js"
+  },
   "scripts": {
     "build": "tsc -b src/",
     "prepack": "npm run build",
