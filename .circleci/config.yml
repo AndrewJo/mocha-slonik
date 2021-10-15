@@ -13,4 +13,4 @@ workflows:
     jobs:
       - node/run:
           name: build
-          npm-run: build
+          npm-run: pack
