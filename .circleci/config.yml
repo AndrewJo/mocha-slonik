@@ -34,11 +34,19 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/mocha-slonik
+      - run:
+          name: Set NPM token
+          command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
+      - unless:
+          condition: << pipeline.git.tag >>
+          steps:
+            - run: npm publish --dry-run
 
 workflows:
   build-and-publish:
     jobs:
       - build
       - publish:
+          context: npm
           requires:
             - build
