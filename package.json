@@ -5,6 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "build": "tsc -b src/",
+    "prepack": "npm run build",
     "prepare": "ts-patch install -s",
     "test": "mocha --recursive tests/**/*.ts"
   },
