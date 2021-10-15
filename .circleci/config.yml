@@ -39,6 +39,10 @@ jobs:
       - run:
           name: Set NPM token
           command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
+      - when:
+          condition: << pipeline.git.tag >>
+          steps:
+            - run: npm publish
       - unless:
           condition: << pipeline.git.tag >>
           steps:
