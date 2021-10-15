@@ -21,6 +21,10 @@ jobs:
           command: |
             mkdir package
             npm pack --pack-destination package
+      - persist_to_workspace:
+          root: .
+          paths:
+            - "*"
       - store_artifacts:
           path: package
           destination: .
