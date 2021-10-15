@@ -24,7 +24,7 @@ export class BindPoolMock extends EventEmitter {
     clientConfiguration: ClientConfigurationType
   ): Promise<DatabaseTransactionConnectionType> {
     return new Promise(async (resolve, reject) => {
-      // If an existing transaction already exists, resolve immediately.
+      // Re-use existing transaction.
       if (this.transaction) {
         return resolve(this.transaction);
       }
