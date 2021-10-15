@@ -9,6 +9,23 @@ orbs:
   node: circleci/node@4.7.0
 
 jobs:
+  test:
+    docker:
+      - image: cimg/node:lts
+      - image: circleci/postgres:13-ram
+    working_directory: ~/mocha-slonik
+    steps:
+      - checkout
+      - node/install-npm
+      - node/install-packages
+      - run:
+          name: Compile TypeScript
+          command: npm run build
+      - run:
+          name: Run tests
+          command: npm test
+          environment:
+            DATABASE_URL: postgres://postgres@localhost:5432/circle_test
   build:
     docker:
       - image: cimg/node:lts
@@ -51,8 +68,14 @@ jobs:
 workflows:
   build-and-publish:
     jobs:
-      - build
+      - test
+      - build:
+          requires:
+            - test
       - publish:
           context: npm
           requires:
             - build
+          filters:
+            branches:
+              only: master
