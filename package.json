@@ -12,7 +12,8 @@
     "build": "tsc -b src/",
     "prepack": "npm run build",
     "prepare": "ts-patch install -s",
-    "test": "mocha --recursive tests/**/*.ts"
+    "test": "mocha --recursive tests/**/*.ts",
+    "test:coverage": "nyc mocha --recursive tests/**/*.ts"
   },
   "repository": {
     "type": "git",
@@ -55,6 +56,7 @@
     "eslint": "^8.0.0",
     "eslint-config-prettier": "^8.3.0",
     "mocha": "^9.1.2",
+    "nyc": "^15.1.0",
     "prettier": "^2.4.1",
     "slonik": "^24.1.1",
     "ts-node": "^10.3.0",
