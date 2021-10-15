@@ -17,7 +17,12 @@ jobs:
       - node/install-packages
       - run:
           name: Build package
-          command: npm pack
+          command: |
+            mkdir package
+            npm pack --pack-destination package
+      - store_artifacts:
+          path: package
+          destination: .
 
 workflows:
   build-and-deploy:
