@@ -1,6 +1,7 @@
 {
   // Editor
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.rulers": [100],
 
   // Files
   "files.insertFinalNewline": true,
