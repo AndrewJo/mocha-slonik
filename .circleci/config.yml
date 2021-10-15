@@ -8,9 +8,18 @@ orbs:
   # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/node
   node: circleci/node@4.7.0
 
+jobs:
+  build:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
+      - node/install-packages
+      - run:
+          name: Build package
+          command: npm pack
+
 workflows:
   build-and-deploy:
     jobs:
-      - node/run:
-          name: build
-          npm-run: pack
+      - build
