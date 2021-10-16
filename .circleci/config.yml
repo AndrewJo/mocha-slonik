@@ -30,6 +30,7 @@ jobs:
           name: Run tests
           command: |
             npm run test:coverage
+            mkdir -p coverage
             npx nyc report --reporter=json > coverage/coverage.json
             npx codecov
           environment:
