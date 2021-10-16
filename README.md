@@ -15,13 +15,15 @@ mocha-slonik is a [Root Hook Plugin][root-hook-plugin] for [Mocha][mocha] that u
 [Slonik query methods][slonik-query-methods] in a transaction that automatically rolls back after
 each test.
 
-## Usage
+## Installation
 
-Install this library as a dev dependency:
+Install this library as a dev dependency in your project:
 
 ```sh
 npm i -D mocha-slonik
 ```
+
+## Usage
 
 Require `mocha-slonik/register` in Mocha CLI:
 
@@ -39,11 +41,12 @@ Or update `.mocharc` configuration file:
 }
 ```
 
-That's it!
+That's it! All of your Slonik queries will be wrapped in a transaction in both your application
+code and your tests that will automatically be rolled back after each test block.
 
-### Example Express.js project
+## Example Express.js project
 
-#### `app.ts`
+### `app.ts`
 
 ```typescript
 import express, { json } from "express";
@@ -73,7 +76,7 @@ app.get("/articles/:articleId", async (req, res, next) => {
 app.listen(8080);
 ```
 
-#### `app.spec.ts`
+### `app.spec.ts`
 
 ```typescript
 import { expect, use } from "chai";
@@ -148,7 +151,31 @@ describe("/articles", function () {
 });
 ```
 
+## Developing
+
+Please read [CONTRIBUTING.md](./CONTRIBUTING.md) before making changes to this project.
+
+## Running tests
+
+To run tests:
+
+```shell
+npm run build && npm test
+```
+
+To run test with coverage:
+
+```shell
+npm run test:coverage && npx nyc reporter --reporter=lcov
+```
+
+This will generate an HTML coverage report at: `./coverage/lcov-report/index.html`.
+
 ## Limitations
+
+This library overrides parts of Slonik that is not part of its public API and may break in the
+future. Please make sure to check the release notes for compatible Slonik versions before using
+this library.
 
 ### Lack of `copyFromBinary` support
 
