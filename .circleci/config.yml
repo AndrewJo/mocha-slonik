@@ -22,7 +22,7 @@ jobs:
       - node/install-packages
       - run:
           name: Install Codecov
-          command: npm i -g codecov
+          command: npm i -D codecov
       - run:
           name: Compile TypeScript
           command: npm run build
@@ -31,7 +31,7 @@ jobs:
           command: |
             npm test:coverage
             npx nyc report --reporter=json > coverage/coverage.json
-            codecov
+            npx codecov
           environment:
             DATABASE_URL: postgres://postgres:circleci_test@localhost:5432/circle_test
   build:
