@@ -79,9 +79,15 @@ workflows:
     jobs:
       - test:
           context: test
+          filters:
+            tags:
+              only: /v\d+(?:\.\d+){0,2}(?:-\w+(?:\.\w+)*){0,1}/
       - build:
           requires:
             - test
+          filters:
+            tags:
+              only: /v\d+(?:\.\d+){0,2}(?:-\w+(?:\.\w+)*){0,1}/
       - publish:
           context: npm
           requires:
@@ -89,3 +95,5 @@ workflows:
           filters:
             branches:
               only: master
+            tags:
+              only: /v\d+(?:\.\d+){0,2}(?:-\w+(?:\.\w+)*){0,1}/
