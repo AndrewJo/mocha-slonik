@@ -1,5 +1,11 @@
 # mocha-slonik
 
+![npm](https://img.shields.io/npm/v/mocha-slonik?style=flat-square)
+![CircleCI](https://img.shields.io/circleci/build/github/AndrewJo/mocha-slonik/master?style=flat-square)
+![Codecov branch](https://img.shields.io/codecov/c/github/AndrewJo/mocha-slonik/master?style=flat-square)
+![GitHub](https://img.shields.io/github/license/AndrewJo/mocha-slonik?style=flat-square)
+![npm](https://img.shields.io/npm/dw/mocha-slonik?style=flat-square)
+
 Slonik transaction support for [Mocha][mocha] test framework.
 
 ## How it works
