@@ -29,7 +29,7 @@ jobs:
       - run:
           name: Run tests
           command: |
-            npm test:coverage
+            npm run test:coverage
             npx nyc report --reporter=json > coverage/coverage.json
             npx codecov
           environment:
