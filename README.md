@@ -108,6 +108,10 @@ describe("/articles", function () {
     `);
   });
 
+  afterEach(async function () {
+    await pool.rollback();
+  });
+
   after(function (done) {
     pool.end().then(() => {
       client.close();
