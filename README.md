@@ -30,6 +30,44 @@ npm i -D mocha-slonik
 This is recommended for applications that utilize factory design pattern and does not wish to
 introduce global side effect on the Slonik module itself.
 
+This is especially useful if you want fine control over when you want to rollback the transactions.
+For example, if you have a nested `describe` block but only wish to rollback on the inner block,
+you can choose to rollback in the inner `afterEach` function.
+
+```typescript
+import { createPool } from "mocha-slonik";
+
+describe("outer block", function () {
+  let pool;
+
+  before(function () {
+    pool = createPool(/* ... */);
+  });
+
+  describe("test group 1", function () {
+    afterEach(async function () {
+      await pool.rollback();
+    });
+
+    it("should insert data", async function () {
+      // ...
+    });
+
+    it("should test something else with inserted data", async function () {
+      // ...
+    });
+  });
+
+  it("shouldn't be affected by changes to data by tests in inner block", async function () {
+    // ...
+  })
+});
+```
+
+This ensures the tests that are grouped by the inner `describe` block see the side effects of
+previous tests within the group but isolated from other tests outside of the inner `describe`
+block.
+
 #### Example Express.js project
 
 ##### `createServer.ts`
@@ -101,13 +139,14 @@ describe("/articles", function () {
       // ...
     ];
 
-    // Bulk insert test fixture (rolls back after each test)
+    // Bulk insert test fixture
     await pool.query(sql`
       INSERT INTO articles (title, body)
       SELECT * FROM ${sql.unnest(testFixtures, ["text", "text"])};
     `);
   });
 
+  // Remember to rollback the pool afterEach test.
   afterEach(async function () {
     await pool.rollback();
   });
