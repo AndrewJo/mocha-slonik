@@ -8,6 +8,18 @@
 
 Slonik transaction support for [Mocha][mocha] test framework.
 
+## Table of Contents
+
+- [How it works](#how-it-works)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Without Mocha Root Hook plugin](#without-mocha-root-hook-plugin)
+  - [With Mocha Root Hook plugin](#with-mocha-root-hook-plugin)
+- [Developing](#developing)
+- [Running tests](#running-tests)
+- [Limitations](#limitations)
+  - [Lack of `copyFromBinary` support](#lack-of-copyfrombinary-support)
+
 ## How it works
 
 mocha-slonik is a [Root Hook Plugin][root-hook-plugin] for [Mocha][mocha] that utilizes
