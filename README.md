@@ -1,10 +1,10 @@
 # mocha-slonik
 
-![npm](https://img.shields.io/npm/v/mocha-slonik?style=flat-square)
-![CircleCI](https://img.shields.io/circleci/build/github/AndrewJo/mocha-slonik/master?style=flat-square)
-![Codecov branch](https://img.shields.io/codecov/c/github/AndrewJo/mocha-slonik/master?style=flat-square)
-![GitHub](https://img.shields.io/github/license/AndrewJo/mocha-slonik?style=flat-square)
-![npm](https://img.shields.io/npm/dw/mocha-slonik?style=flat-square)
+[![npm](https://img.shields.io/npm/v/mocha-slonik?style=flat-square)][npm]
+[![CircleCI](https://img.shields.io/circleci/build/github/AndrewJo/mocha-slonik/master?style=flat-square)][circleci]
+[![Codecov branch](https://img.shields.io/codecov/c/github/AndrewJo/mocha-slonik/master?style=flat-square)][codecov]
+[![GitHub](https://img.shields.io/github/license/AndrewJo/mocha-slonik?style=flat-square)](./LICENSE)
+[![npm](https://img.shields.io/npm/dw/mocha-slonik?style=flat-square)][npm]
 
 Slonik transaction support for [Mocha][mocha] test framework.
 
@@ -365,6 +365,9 @@ Due to the lack of support for transactions in `copyFromBinary` method and
 [the potential for being deprecated in the future versions][slonik-issue-161], calling
 `copyFromBinary` will immediately reject with an error message.
 
+[npm]: https://www.npmjs.com/package/mocha-slonik
+[circleci]: https://circleci.com/gh/AndrewJo/mocha-slonik/tree/master
+[codecov]: https://app.codecov.io/gh/AndrewJo/mocha-slonik/
 [mocha]: https://mochajs.org
 [root-hook-plugin]: https://mochajs.org/#root-hook-plugins
 [ts-mock-imports]: https://github.com/EmandM/ts-mock-imports
