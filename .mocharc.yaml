@@ -1,4 +1,4 @@
 recursive: true
 require:
   - ts-node/register
-  - mocha-slonik/register
+  - dist/register
