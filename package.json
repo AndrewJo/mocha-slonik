@@ -10,7 +10,7 @@
   "scripts": {
     "clean": "rm -rf dist/",
     "build": "tsc -b src/",
-    "postbuild": "npm link",
+    "postbuild": "npm link mocha-slonik",
     "prepack": "npm run build",
     "prepare": "ts-patch install -s",
     "pretest": "npm run build",
