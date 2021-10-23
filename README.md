@@ -44,7 +44,7 @@ introduce global side effect on the Slonik module itself.
 
 This is especially useful if you want fine control over when you want to rollback the transactions.
 For example, if you have a nested `describe` block but only wish to rollback on the inner block,
-you can choose to rollback in the inner `afterEach` function.
+you can choose to rollback in the inner `after` function.
 
 ```typescript
 import { createPool } from "mocha-slonik";
@@ -57,7 +57,8 @@ describe("outer block", function () {
   });
 
   describe("test group 1", function () {
-    afterEach(async function () {
+    // Group 1 rolls back after the entire group has completed running.
+    after(async function () {
       await pool.rollback();
     });
 
@@ -70,9 +71,17 @@ describe("outer block", function () {
     });
   });
 
-  it("shouldn't be affected by changes to data by tests in inner block", async function () {
-    // ...
-  })
+  describe("test group 2", function () {
+    // Group 2 rolls back after EACH test completed running.
+    afterEach(async function () {
+      await pool.rollback();
+    });
+
+    it("shouldn't be affected by changes to data by tests in group 1", async function () {
+      // ...
+    })
+  });
+
 });
 ```
 
