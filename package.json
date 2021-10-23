@@ -33,7 +33,8 @@
     "postgres",
     "testing",
     "test",
-    "mocha"
+    "mocha",
+    "slonik"
   ],
   "author": "Andrew Jo <andrewjo@gmail.com>",
   "license": "BSD-2-Clause",
