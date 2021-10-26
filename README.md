@@ -15,6 +15,9 @@ Slonik transaction support for [Mocha][mocha] test framework.
 - [Usage](#usage)
   - [Without Mocha Root Hook plugin](#without-mocha-root-hook-plugin)
   - [With Mocha Root Hook plugin](#with-mocha-root-hook-plugin)
+- [API](#api)
+  - [`rollback`](#rollback)
+  - [`currentTransaction`](#current-transaction)
 - [Developing](#developing)
 - [Running tests](#running-tests)
 - [Limitations](#limitations)
@@ -342,7 +345,7 @@ describe("/articles", function () {
 });
 ```
 
-## Query methods
+## API
 
 The query methods exposed by mocha-slonik is nearly identical to
 [query methods][slonik-query-methods] exposed by default Slonik pool instance except for few
