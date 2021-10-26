@@ -342,6 +342,46 @@ describe("/articles", function () {
 });
 ```
 
+## Query methods
+
+The query methods exposed by mocha-slonik is nearly identical to
+[query methods][slonik-query-methods] exposed by default Slonik pool instance except for few
+additional methods, properties and [limitations](#limitations).
+
+### `rollback`
+
+`rollback` method is used to rollback the global transaction in mocha-slonik. It should _only_ be
+used in `after` or `afterEach` blocks in your tests. Usage anywhere else is considered
+anti-pattern and may introduce side effects that are hard to debug.
+
+Example:
+
+```typescript
+import { createPool } from "mocha-slonik";
+
+describe("/articles", function () {
+  let pool;
+
+  before(async function () {
+    pool = createPool(process.env.DATABASE_URL);
+  });
+
+  // ...
+
+  // Remember to rollback the pool afterEach test.
+  afterEach(async function () {
+    await pool.rollback();
+  });
+
+  // ...
+});
+```
+
+### `currentTransaction`
+
+`currentTransaction` getter is a property that returns the current transaction if one has been
+started, `undefined` otherwise.
+
 ## Developing
 
 Please read [CONTRIBUTING.md](./CONTRIBUTING.md) before making changes to this project.
