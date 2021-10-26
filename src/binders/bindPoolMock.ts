@@ -99,6 +99,9 @@ export class BindPoolMock extends EventEmitter {
         async copyFromBinary(_copyQuery, _values, _columnTypes): Promise<Record<string, unknown>> {
           throw new Error("copyFromBinary is not supported in transactions.");
         },
+        get currentTransaction() {
+          return that.transaction;
+        },
         async end() {
           const terminateIdleClients = () => {
             const activeConnectionCount = pool.totalCount - pool.idleCount;

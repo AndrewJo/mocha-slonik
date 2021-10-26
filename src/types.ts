@@ -3,9 +3,11 @@ import type {
   InternalDatabasePoolType,
   Logger,
   DatabasePoolType as BaseDatabasePoolType,
-} from "slonik/dist/src/types"
+  DatabaseTransactionConnectionType,
+} from "slonik/dist/src/types";
 
 export type DatabasePoolType = BaseDatabasePoolType & {
+  get currentTransaction(): DatabaseTransactionConnectionType;
   rollback: () => void;
 };
 
