@@ -2,7 +2,8 @@
   "name": "mocha-slonik",
   "version": "1.1.0",
   "description": "Slonik transaction support for Mocha test framework",
-  "main": "index.ts",
+  "main": "dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": "./dist/index.js",
     "./register": "./dist/register.js"
