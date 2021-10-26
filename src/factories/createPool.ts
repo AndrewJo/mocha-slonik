@@ -3,11 +3,12 @@ import pgClient from "pg";
 import type pgTypes from "pg";
 import { serializeError } from "serialize-error";
 import { Logger } from "slonik/dist/src/Logger";
-import { BindPoolMock } from "../binders/bindPoolMock";
-import type { ClientConfigurationInputType, DatabasePoolType } from "slonik/dist/src/types";
+import type { ClientConfigurationInputType } from "slonik/dist/src/types";
 import { createUid } from "slonik/dist/src/utilities";
 import { createClientConfiguration } from "slonik/dist/src/factories/createClientConfiguration";
 import { createPoolConfiguration } from "slonik/dist/src/factories/createPoolConfiguration";
+import { BindPoolMock } from "mocha-slonik/binders/bindPoolMock";
+import type { DatabasePoolType } from "mocha-slonik/types";
 
 /**
  * @param connectionUri PostgreSQL [Connection URI](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING).

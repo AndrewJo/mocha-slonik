@@ -1,19 +1,14 @@
 import { EventEmitter } from "events";
-import { DatabasePoolType, DatabaseTransactionConnectionType } from "slonik";
+import { DatabaseTransactionConnectionType } from "slonik";
 import { createConnection } from "slonik/dist/src/factories";
-import {
+import type {
   ClientConfigurationType,
   InternalDatabasePoolType,
   Logger,
   PoolStateType,
   TaggedTemplateLiteralInvocationType,
 } from "slonik/dist/src/types";
-
-export type BindPoolFunction = (
-  parentLog: Logger,
-  pool: InternalDatabasePoolType,
-  clientConfiguration: ClientConfigurationType
-) => DatabasePoolType;
+import type { BindPoolFunction } from "mocha-slonik/types";
 
 export class BindPoolMock extends EventEmitter {
   protected transaction: DatabaseTransactionConnectionType;
