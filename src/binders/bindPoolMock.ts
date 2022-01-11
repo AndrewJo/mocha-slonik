@@ -147,9 +147,9 @@ export class BindPoolMock extends EventEmitter {
         query: wrapTransaction("query"),
         rollback: that.rollback.bind(that),
         stream: wrapTransaction("stream"),
-        async transaction(transactionHandler) {
+        async transaction(transactionHandler, transactionRetryLimit?: number) {
           const trx = await that.getOrCreateTransaction(parentLog, pool, clientConfiguration);
-          return trx.transaction(transactionHandler);
+          return trx.transaction(transactionHandler, transactionRetryLimit);
         },
       };
     };
