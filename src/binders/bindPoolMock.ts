@@ -1,9 +1,9 @@
 import { EventEmitter } from "events";
 import { DatabaseTransactionConnectionType } from "slonik";
 import { createConnection } from "slonik/dist/src/factories";
+import type { Pool } from "pg";
 import type {
   ClientConfigurationType,
-  InternalDatabasePoolType,
   Logger,
   PoolStateType,
   TaggedTemplateLiteralInvocationType,
@@ -15,7 +15,7 @@ export class BindPoolMock extends EventEmitter {
 
   protected getOrCreateTransaction(
     parentLog: Logger,
-    pool: InternalDatabasePoolType,
+    pool: Pool,
     clientConfiguration: ClientConfigurationType
   ): Promise<DatabaseTransactionConnectionType> {
     return new Promise(async (resolve, reject) => {
