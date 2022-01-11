@@ -1,6 +1,7 @@
 import { EventEmitter } from "events";
 import { DatabaseTransactionConnectionType } from "slonik";
 import { createConnection } from "slonik/dist/src/factories";
+import { getPoolState } from "slonik/dist/src/state";
 import type { Pool } from "pg";
 import type {
   ClientConfigurationType,
@@ -103,6 +104,7 @@ export class BindPoolMock extends EventEmitter {
           return that.transaction;
         },
         async end() {
+          const poolState = getPoolState(pool);
           const terminateIdleClients = () => {
             const activeConnectionCount = pool.totalCount - pool.idleCount;
 
@@ -113,7 +115,7 @@ export class BindPoolMock extends EventEmitter {
             }
           };
 
-          pool.slonik.ended = true;
+          poolState.ended = true;
 
           return new Promise((resolve) => {
             terminateIdleClients();
@@ -131,9 +133,10 @@ export class BindPoolMock extends EventEmitter {
         },
         exists: wrapTransaction("exists"),
         getPoolState(): PoolStateType {
+          const poolState = getPoolState(pool);
           return {
             activeConnectionCount: pool.totalCount - pool.idleCount,
-            ended: pool.slonik.ended,
+            ended: poolState.ended,
             idleConnectionCount: pool.idleCount,
             waitingClientCount: pool.waitingCount,
           };
