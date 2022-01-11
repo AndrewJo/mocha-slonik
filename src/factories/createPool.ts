@@ -1,4 +1,3 @@
-import type { EventEmitter } from "events";
 import { Pool as PgPool } from "pg";
 import { serializeError } from "serialize-error";
 import { Logger } from "slonik/dist/src/Logger";
@@ -59,7 +58,7 @@ export const createPool = (
   // });
 
   // istanbul ignore next
-  pool.on("connect", (client: EventEmitter & { connection: any; processID: string }) => {
+  pool.on("connect", (client) => {
     client.on("error", (error) => {
       // if (
       //   error.message.includes("Connection terminated unexpectedly") ||
