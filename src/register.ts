@@ -1,10 +1,10 @@
 import { RootHookObject } from "mocha";
+import { Pool } from "pg";
 import { ImportMock, OtherManager } from "ts-mock-imports";
 import * as bindPool from "slonik/dist/src/binders/bindPool";
 import type {
   ClientConfigurationType,
   DatabasePoolType,
-  InternalDatabasePoolType,
   Logger,
 } from "slonik/dist/src/types";
 import { BindPoolMock } from "mocha-slonik/binders/bindPoolMock";
@@ -13,7 +13,7 @@ let bindPoolMock: BindPoolMock;
 let bindPoolImportMock: OtherManager<
   (
     parentLog: Logger,
-    pool: InternalDatabasePoolType,
+    pool: Pool,
     clientConfiguration: ClientConfigurationType
   ) => DatabasePoolType
 >;
