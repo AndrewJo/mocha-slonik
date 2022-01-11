@@ -11,6 +11,7 @@ Slonik transaction support for [Mocha][mocha] test framework.
 ## Table of Contents
 
 - [How it works](#how-it-works)
+- [Version compatibility](#version-compatibility)
 - [Installation](#installation)
 - [Usage](#usage)
   - [Without Mocha Root Hook plugin](#without-mocha-root-hook-plugin)
@@ -29,6 +30,13 @@ mocha-slonik is a [Root Hook Plugin][root-hook-plugin] for [Mocha][mocha] that u
 [ts-mock-imports][ts-mock-imports] to return a stubbed bindPool function that wrap most of the
 [Slonik query methods][slonik-query-methods] in a transaction that automatically rolls back after
 each test.
+
+## Version compatibility
+
+| mocha-slonik |  slonik |  mocha |
+| -----------: | ------: | -----: |
+| ^2.0.0       | ^25.0.0 | ^9.1.0 |
+| ^1.0.0       | ^24.0.0 | ^9.1.0 |
 
 ## Installation
 
