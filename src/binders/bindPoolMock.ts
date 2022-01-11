@@ -1,31 +1,31 @@
 import { EventEmitter } from "events";
-import { DatabaseTransactionConnectionType } from "slonik";
+import { DatabaseTransactionConnection } from "slonik";
 import { createConnection } from "slonik/dist/src/factories";
 import { getPoolState } from "slonik/dist/src/state";
 import type { Pool } from "pg";
 import type {
-  ClientConfigurationType,
+  ClientConfiguration,
   Logger,
-  PoolStateType,
-  TaggedTemplateLiteralInvocationType,
+  PoolState,
+  TaggedTemplateLiteralInvocation,
 } from "slonik/dist/src/types";
 import type { BindPoolFunction } from "mocha-slonik/types";
 
 export class BindPoolMock extends EventEmitter {
-  protected transaction: DatabaseTransactionConnectionType;
+  protected transaction: DatabaseTransactionConnection;
 
   protected getOrCreateTransaction(
     parentLog: Logger,
     pool: Pool,
-    clientConfiguration: ClientConfigurationType
-  ): Promise<DatabaseTransactionConnectionType> {
+    clientConfiguration: ClientConfiguration
+  ): Promise<DatabaseTransactionConnection> {
     return new Promise(async (resolve, reject) => {
       // Re-use existing transaction.
       if (this.transaction) {
         return resolve(this.transaction);
       }
 
-      const wrappedTransactionHandler = (transaction: DatabaseTransactionConnectionType) =>
+      const wrappedTransactionHandler = (transaction: DatabaseTransactionConnection) =>
         new Promise((_, innerReject) => {
           this.transaction = transaction;
 
@@ -71,7 +71,7 @@ export class BindPoolMock extends EventEmitter {
     const that = this;
     return function (parentLog, pool, clientConfiguration) {
       function wrapTransaction(targetMethodName: string) {
-        return async function (query: TaggedTemplateLiteralInvocationType) {
+        return async function (query: TaggedTemplateLiteralInvocation) {
           if (typeof query === "string") {
             throw new TypeError("Query must be constructed using `sql` tagged template literal.");
           }
@@ -132,7 +132,7 @@ export class BindPoolMock extends EventEmitter {
           });
         },
         exists: wrapTransaction("exists"),
-        getPoolState(): PoolStateType {
+        getPoolState(): PoolState {
           const poolState = getPoolState(pool);
           return {
             activeConnectionCount: pool.totalCount - pool.idleCount,

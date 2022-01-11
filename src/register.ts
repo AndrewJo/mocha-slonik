@@ -3,8 +3,8 @@ import { Pool } from "pg";
 import { ImportMock, OtherManager } from "ts-mock-imports";
 import * as bindPool from "slonik/dist/src/binders/bindPool";
 import type {
-  ClientConfigurationType,
-  DatabasePoolType,
+  ClientConfiguration,
+  DatabasePool,
   Logger,
 } from "slonik/dist/src/types";
 import { BindPoolMock } from "mocha-slonik/binders/bindPoolMock";
@@ -14,8 +14,8 @@ let bindPoolImportMock: OtherManager<
   (
     parentLog: Logger,
     pool: Pool,
-    clientConfiguration: ClientConfigurationType
-  ) => DatabasePoolType
+    clientConfiguration: ClientConfiguration
+  ) => DatabasePool
 >;
 
 export const mochaHooks: RootHookObject = {
