@@ -1,6 +1,7 @@
+import type { Pool } from "pg";
+
 import type {
   ClientConfigurationType,
-  InternalDatabasePoolType,
   Logger,
   DatabasePoolType as BaseDatabasePoolType,
   DatabaseTransactionConnectionType,
@@ -13,6 +14,6 @@ export type DatabasePoolType = BaseDatabasePoolType & {
 
 export type BindPoolFunction = (
   parentLog: Logger,
-  pool: InternalDatabasePoolType,
+  pool: Pool,
   clientConfiguration: ClientConfigurationType
 ) => DatabasePoolType;
