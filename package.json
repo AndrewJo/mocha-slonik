@@ -68,7 +68,7 @@
     "prettier": "^2.4.1",
     "slonik": "^27.0.0",
     "ts-node": "^10.3.0",
-    "ts-patch": "^1.4.4",
+    "ts-patch": "^1.4.5",
     "typescript": "^4.4.4",
     "typescript-transform-paths": "^3.3.1"
   }
