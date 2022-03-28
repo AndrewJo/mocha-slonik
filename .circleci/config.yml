@@ -89,6 +89,7 @@ workflows:
   build-and-publish:
     jobs:
       - test:
+          name: test-mocha-v<< matrix.mocha-version >>-slonik-v<< matrix.slonik-version >>
           context: test
           filters:
             tags:
