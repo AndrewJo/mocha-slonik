@@ -10,6 +10,14 @@ orbs:
 
 jobs:
   test:
+    parameters:
+      mocha-version:
+        default: "9"
+        description: The target version of Mocha to run tests against.
+        type: string
+      slonik-version:
+        description: The target version of Slonik to run tests against.
+        type: string
     docker:
       - image: cimg/node:lts
       - image: circleci/postgres:13-ram
@@ -20,6 +28,9 @@ jobs:
       - checkout
       - node/install-npm
       - node/install-packages
+      - run:
+          name: Install Slonik v<< parameters.slonik-version >> & Mocha v<< parameters.mocha-version >>
+          command: npm i slonik@<< parameters.slonik-version >> mocha@<< parameters.mocha-version >>
       - run:
           name: Install Codecov
           command: npm i -D codecov
