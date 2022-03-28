@@ -93,6 +93,10 @@ workflows:
           filters:
             tags:
               only: /v\d+(?:\.\d+){0,2}(?:-\w+(?:\.\w+)*){0,1}/
+          matrix:
+            parameters:
+              mocha-version: ["9"]
+              slonik-version: ["27", "28"]
       - build:
           requires:
             - test
