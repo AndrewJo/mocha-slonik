@@ -454,7 +454,7 @@ import { expect } from "chai";
 import { createPool } from "mocha-slonik";
 import { sql } from "slonik";
 
-describe("Rollback on afterEach", function () {
+describe("Rollback on individual test cases", function () {
   let pool;
 
   before(async function () {
