@@ -19,6 +19,8 @@ Slonik transaction support for [Mocha][mocha] test framework.
 - [API](#api)
   - [`rollback`](#rollback)
   - [`currentTransaction`](#current-transaction)
+- [Best practices](#best-practices)
+  - [Always rollback transaction in `after`/`afterEach` block](#always-rollback-transaction-in-afteraftereach-block)
 - [Developing](#developing)
 - [Running tests](#running-tests)
 - [Limitations](#limitations)
@@ -395,6 +397,107 @@ describe("/articles", function () {
 
 `currentTransaction` getter is a property that returns the current transaction if one has been
 started, `undefined` otherwise.
+
+## Best practices
+
+### Always rollback transaction in `after`/`afterEach` block
+
+Unless you are using the Mocha Root Hook plugin, you should always rollback your transactions in
+`after` or `afterEach` block instead of individual `it` test cases. This prevents unexpected
+surprises if your test code throws errors or has rejected promises because `after`/`afterEach` is
+guaranteed to run even if your tests fail or contains errors.
+
+**Do:**
+
+```typescript
+import { createPool } from "mocha-slonik";
+
+describe("Rollback on afterEach", function () {
+  let pool;
+
+  before(async function () {
+    pool = createPool(process.env.DATABASE_URL);
+  });
+
+  // ...
+
+  // Rollback the transaction after each test.
+  afterEach(async function () {
+    await pool.rollback();
+  });
+
+  // ...
+});
+
+describe("Rollback on after", function () {
+  let pool;
+
+  before(async function () {
+    pool = createPool(process.env.DATABASE_URL);
+  });
+
+  // ...
+
+  // Rollback the transaction after the entire group of tests in the describe block.
+  after(async function () {
+    await pool.rollback();
+  });
+
+  // ...
+});
+```
+
+**Don’t:**
+
+```typescript
+import { expect } from "chai";
+import { createPool } from "mocha-slonik";
+import { sql } from "slonik";
+
+describe("Rollback on afterEach", function () {
+  let pool;
+
+  before(async function () {
+    pool = createPool(process.env.DATABASE_URL);
+  });
+
+  it("Bad example 1", async function () {
+    const result = await pool.oneFirst(sql`SELECT 1`);
+    expect(result).to.eq(0);
+
+    // If the assertion above fails, the rollback won't execute.
+    await pool.rollback();
+  });
+
+  it("Bad example 2", async function () {
+    const result = await pool.oneFirst(sql`SELECT 1`);
+
+    // Simulate some thrown error in the test code
+    await Promise.reject(new Error());
+
+    // The rollback won't excute even if the rollback is above the assertion this time.
+    await pool.rollback();
+
+    expect(result).to.eql(1);
+  });
+
+  it("Bad example 3", async function () {
+    try {
+      const result = await pool.oneFirst(sql`SELECT 1`);
+
+      // Simulate some thrown error in the test code
+      await Promise.reject(new Error());
+
+      expect(result).to.eql(1);
+    } catch (error) {
+      throw error;
+    } finally {
+      // Technically works but you have to remember to add the try/finally block for EVERY test case.
+      await pool.rollback();
+    }
+  });
+});
+```
 
 ## Developing
 
