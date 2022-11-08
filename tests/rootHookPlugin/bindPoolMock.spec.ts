@@ -35,8 +35,8 @@ describe("BindPoolMock", function () {
     return expect(actual).to.be.rejectedWith(TypeError, "Query must be constructed using `sql` tagged template literal.");
   });
 
-  it("should wrap new pools in transaction", function () {
-    const pool2 = createPool("postgres://localhost:1234", {
+  it("should wrap new pools in transaction", async function () {
+    const pool2 = await createPool("postgres://localhost:1234", {
       interceptors: [
         {
           beforePoolConnection(ctx) {
