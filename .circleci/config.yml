@@ -20,7 +20,7 @@ jobs:
         type: string
     docker:
       - image: cimg/node:lts
-      - image: circleci/postgres:13-ram
+      - image: cimg/postgres:13.8
         environment:
           POSTGRES_PASSWORD: circleci_test
     working_directory: ~/mocha-slonik
