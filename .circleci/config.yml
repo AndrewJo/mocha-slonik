@@ -96,7 +96,7 @@ workflows:
               only: /v\d+(?:\.\d+){0,2}(?:-\w+(?:\.\w+)*){0,1}/
           matrix:
             parameters:
-              mocha-version: ["9"]
+              mocha-version: ["9", "10"]
               slonik-version: ["27", "28", "29"]
       - build:
           requires:
