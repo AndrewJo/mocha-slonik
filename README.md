@@ -6,7 +6,7 @@
 [![GitHub](https://img.shields.io/github/license/AndrewJo/mocha-slonik?style=flat-square)](./LICENSE)
 [![npm](https://img.shields.io/npm/dw/mocha-slonik?style=flat-square)][npm]
 
-Slonik transaction support for [Mocha][mocha] test framework.
+[Slonik][slonik] transaction support for [Mocha][mocha] test framework.
 
 ## Table of Contents
 
