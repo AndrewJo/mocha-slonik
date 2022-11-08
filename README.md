@@ -18,7 +18,7 @@ Slonik transaction support for [Mocha][mocha] test framework.
   - [With Mocha Root Hook plugin](#with-mocha-root-hook-plugin)
 - [API](#api)
   - [`rollback`](#rollback)
-  - [`currentTransaction`](#current-transaction)
+  - [`currentTransaction`](#currenttransaction)
 - [Best practices](#best-practices)
   - [Always rollback transaction in `after`/`afterEach` block](#always-rollback-transaction-in-afteraftereach-block)
 - [Developing](#developing)
