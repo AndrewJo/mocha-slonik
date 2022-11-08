@@ -97,7 +97,7 @@ workflows:
           matrix:
             parameters:
               mocha-version: ["9"]
-              slonik-version: ["27", "28"]
+              slonik-version: ["27", "28", "29"]
       - build:
           requires:
             - test
