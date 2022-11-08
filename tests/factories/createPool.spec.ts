@@ -10,9 +10,9 @@ describe("createPool", function () {
   let dbUrl: string;
   let pool: DatabasePoolType;
 
-  before(function () {
+  before(async function () {
     dbUrl = env.DATABASE_URL ?? "postgres://localhost:5432";
-    pool = createPool(dbUrl);
+    pool = await createPool(dbUrl);
   });
 
   describe("test group #1", function () {

@@ -9,9 +9,9 @@ describe("BindPoolMock", function () {
   let dbUrl: string;
   let pool: DatabasePoolType;
 
-  before(function () {
+  before(async function () {
     dbUrl = env.DATABASE_URL ?? "postgres://localhost:5432";
-    pool = createPool(dbUrl);
+    pool = await createPool(dbUrl);
   });
 
   beforeEach(async function () {
