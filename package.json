@@ -43,8 +43,8 @@
   },
   "homepage": "https://github.com/AndrewJo/mocha-slonik#readme",
   "peerDependencies": {
-    "mocha": ">=9.2.2",
-    "slonik": "^27.0.0 || ^28.0.0 || ^29.0.0"
+    "mocha": "^10.1.0",
+    "slonik": "^30.0.0"
   },
   "dependencies": {
     "sinon": "^11.1.2",
@@ -62,11 +62,11 @@
     "chai-as-promised": "^7.1.1",
     "eslint": "^8.0.0",
     "eslint-config-prettier": "^8.3.0",
-    "mocha": "^9.2.2 || ^10.1.0",
+    "mocha": "^10.1.0",
     "nyc": "^15.1.0",
     "pg": "^8.7.1",
     "prettier": "^2.4.1",
-    "slonik": "^27.0.0 || ^28.0.0 || ^29.0.0",
+    "slonik": "^30.0.0",
     "ts-node": "^10.3.0",
     "ts-patch": "^1.4.5",
     "typescript": "^4.8.4",
