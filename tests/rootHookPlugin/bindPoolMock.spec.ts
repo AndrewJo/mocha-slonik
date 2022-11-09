@@ -1,13 +1,13 @@
 import { env } from "process";
 import { expect, use } from "chai";
 import chaiAsPromised from "chai-as-promised";
-import { createPool, DatabasePoolType, DatabaseTransactionConnectionType, NotFoundError, sql } from "slonik";
+import { createPool, DatabasePool, NotFoundError, sql } from "slonik";
 
 use(chaiAsPromised);
 
 describe("BindPoolMock", function () {
   let dbUrl: string;
-  let pool: DatabasePoolType;
+  let pool: DatabasePool;
 
   before(async function () {
     dbUrl = env.DATABASE_URL ?? "postgres://localhost:5432";

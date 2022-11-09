@@ -1,14 +1,14 @@
 import { env } from "process";
 import { expect, use } from "chai";
 import chaiAsPromised from "chai-as-promised";
-import { DatabasePoolType, createPool } from "mocha-slonik";
+import { DatabasePool, createPool } from "../../src/index";
 import { NotFoundError, sql } from "slonik";
 
 use(chaiAsPromised);
 
 describe("createPool", function () {
   let dbUrl: string;
-  let pool: DatabasePoolType;
+  let pool: DatabasePool;
 
   before(async function () {
     dbUrl = env.DATABASE_URL ?? "postgres://localhost:5432";
