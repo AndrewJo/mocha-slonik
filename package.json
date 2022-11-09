@@ -44,7 +44,7 @@
   "homepage": "https://github.com/AndrewJo/mocha-slonik#readme",
   "peerDependencies": {
     "mocha": "^10.1.0",
-    "slonik": "^30.0.0"
+    "slonik": "^30.0.0 || ^31.0.0 || ^32.0.0"
   },
   "dependencies": {
     "sinon": "^11.1.2",
@@ -67,7 +67,7 @@
     "nyc": "^15.1.0",
     "pg": "^8.7.1",
     "prettier": "^2.4.1",
-    "slonik": "^30.0.0",
+    "slonik": "^30.0.0 || ^31.0.0 || ^32.0.0",
     "ts-node": "^10.9.1",
     "ts-patch": "^1.4.5",
     "tsconfig-paths": "^4.1.0",
