@@ -35,6 +35,12 @@ each test.
 
 ## Version compatibility
 
+mocha-slonik follows [Semantic Versioning][semver] specification. Each major version breaks
+backwards compatibility with [Slonik][slonik] and [Mocha][mocha] versions.
+
+Refer to the compatibility chart below for picking the mocha-slonik version that works with Slonik
+and Mocha versions in your project.
+
 |  mocha-slonik |                            slonik |   mocha |
 | ------------: | --------------------------------: | ------: |
 |        ^5.0.0 | ^30.0.0 \|\| ^31.0.0 \|\| ^32.0.0 | ^10.1.0 |
@@ -542,3 +548,4 @@ Due to the lack of support for transactions in `copyFromBinary` method and
 [slonik]: https://github.com/gajus/slonik
 [slonik-query-methods]: https://github.com/gajus/slonik#slonik-query-methods
 [slonik-issue-161]: https://github.com/gajus/slonik/issues/161#issuecomment-604770259
+[semver]: https://semver.org/
