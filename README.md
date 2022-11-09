@@ -507,6 +507,49 @@ describe("Rollback on individual test cases", function () {
 });
 ```
 
+### Use global Root Hook to DRY up boilerplating
+
+If you’re not using the Root Hook plugin provided by this library but wish to [DRY][dry] up your
+setup and teardown code across multiple test files, you should define a global Root Hook in your
+tests directory and require it.
+
+**tests/global.ts:**
+
+```typescript
+import { Server } from "http";
+import express from "express";
+import { RootHookObject } from "mocha";
+import { DatabasePool, createPool } from "mocha-slonik";
+
+// See example at: https://github.com/AndrewJo/mocha-slonik#createserverts
+import { createServer } from "../src/server";
+
+declare global {
+  namespace Mocha {
+    interface Context {
+      pool: DatabasePool;
+      server: Server;
+    }
+  }
+}
+
+export const mochaHooks: RootHookObject = {
+  async beforeAll() {
+    // The pool and HTTP server is now available for all of the tests through the context object.
+    this.pool = await createPool("postgres://localhost:5432/testdb");
+    this.server = createServer({ app: express(), pool: this.pool });
+  }
+};
+```
+
+**.mocharc.yaml:**
+
+```yaml
+require:
+  - "ts-node/register"
+  - "tests/global"
+```
+
 ## Developing
 
 Please read [CONTRIBUTING.md](./CONTRIBUTING.md) before making changes to this project.
@@ -549,3 +592,4 @@ Due to the lack of support for transactions in `copyFromBinary` method and
 [slonik-query-methods]: https://github.com/gajus/slonik#slonik-query-methods
 [slonik-issue-161]: https://github.com/gajus/slonik/issues/161#issuecomment-604770259
 [semver]: https://semver.org/
+[dry]: https://en.wikipedia.org/wiki/Don%27t_repeat_yourself
