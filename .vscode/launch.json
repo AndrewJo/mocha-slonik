@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [{
+    "name": "Test",
+    "request": "launch",
+    "type": "node",
+    "runtimeExecutable": "npm",
+    "runtimeArgs": ["test"],
+    "args": [],
+    "sourceMaps": true,
+    "skipFiles": ["<node_internals>/**"],
+    "console": "integratedTerminal"
+  }]
+}
