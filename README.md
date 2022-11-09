@@ -21,6 +21,7 @@
   - [`currentTransaction`](#currenttransaction)
 - [Best practices](#best-practices)
   - [Always rollback transaction in `after`/`afterEach` block](#always-rollback-transaction-in-afteraftereach-block)
+  - [Use global Root Hook to DRY up boilerplating](#use-global-root-hook-to-dry-up-boilerplating)
 - [Developing](#developing)
 - [Running tests](#running-tests)
 - [Limitations](#limitations)
