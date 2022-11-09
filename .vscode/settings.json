@@ -9,5 +9,19 @@
   "files.trimTrailingWhitespace": true,
 
   // TypeScript
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+
+  /************************************************************************************************
+   * Mocha Test Explorer
+   ***********************************************************************************************/
+
+  // Search for spec files in the tests directory
+  "mochaExplorer.files": "tests/**/*.spec.ts",
+
+  // Ensure tests are run in test environment (loads correct config files)
+  "mochaExplorer.env": {
+    "NODE_ENV": "test"
+  },
+
+  "mochaExplorer.envPath": ".env"
 }
