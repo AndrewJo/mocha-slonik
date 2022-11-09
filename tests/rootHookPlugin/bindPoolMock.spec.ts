@@ -36,7 +36,7 @@ describe("BindPoolMock", function () {
   });
 
   it("should wrap new pools in transaction", async function () {
-    const pool2 = await createPool("postgres://localhost:1234", {
+    const pool2 = await createPool(env.DATABASE_URL ?? "postgres://localhost:5432", {
       interceptors: [
         {
           beforePoolConnection(ctx) {
