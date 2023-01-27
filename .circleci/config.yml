@@ -105,7 +105,7 @@ jobs:
       - run:
           name: Set up GPG Script
           command: |
-            echo '/usr/bin/gpg --passphrase ${GPG_PASSPHRASE} --batch --no-tty "$@"' > /tmp/gpg-with-passphrase
+            echo '/usr/bin/gpg --batch --no-tty --passphrase ${GPG_PASSPHRASE} --pinentry-mode loopback "$@"' > /tmp/gpg-with-passphrase
             chmod +x /tmp/gpg-with-passphrase
       - run:
           name: Configure Git client
