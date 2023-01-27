@@ -117,7 +117,7 @@ jobs:
           command: npm run semantic-release
 
 workflows:
-  build-and-publish:
+  build-and-release:
     jobs:
       - test:
           name: test-mocha-v<< matrix.mocha-version >>-slonik-v<< matrix.slonik-version >>
