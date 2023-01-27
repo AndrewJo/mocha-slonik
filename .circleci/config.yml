@@ -128,7 +128,7 @@ workflows:
           matrix:
             parameters:
               mocha-version: ["10"]
-              slonik-version: ["30", "31", "32"]
+              slonik-version: ["33"]
       - release:
           context:
             - npm
