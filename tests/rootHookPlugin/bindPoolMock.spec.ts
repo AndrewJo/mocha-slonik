@@ -15,18 +15,18 @@ describe("BindPoolMock", function () {
   });
 
   beforeEach(async function () {
-    await pool.query(sql`CREATE TABLE test (foo integer NOT NULL);`);
+    await pool.query(sql.unsafe`CREATE TABLE test (foo integer NOT NULL);`);
   });
 
   it("should wrap all database calls in transaction", async function () {
     const actual = await pool.connect(async (connection) => {
-      return connection.oneFirst(sql`INSERT INTO test (foo) VALUES (1) RETURNING foo;`);
+      return connection.oneFirst(sql.unsafe`INSERT INTO test (foo) VALUES (1) RETURNING foo;`);
     });
     expect(actual).to.equal(1);
   });
 
   it("should rollback after each tests", function () {
-    const actual = pool.one(sql`SELECT * FROM test;`);
+    const actual = pool.one(sql.unsafe`SELECT * FROM test;`);
     return expect(actual).to.be.rejectedWith(NotFoundError, "Resource not found.");
   });
 
@@ -47,7 +47,7 @@ describe("BindPoolMock", function () {
     });
 
     return pool2.connect(async (connection) => {
-      await connection.query(sql`SELECT 1`);
+      await connection.query(sql.unsafe`SELECT 1`);
       expect(pool.getPoolState().activeConnectionCount).to.not.equal(pool2.getPoolState().activeConnectionCount);
     });
   });

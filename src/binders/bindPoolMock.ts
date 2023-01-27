@@ -7,7 +7,7 @@ import type {
   ClientConfiguration,
   Logger,
   PoolState,
-  TaggedTemplateLiteralInvocation,
+  QuerySqlToken,
 } from "slonik/dist/src/types";
 import type { BindPoolFunction } from "mocha-slonik/types";
 
@@ -71,7 +71,7 @@ export class BindPoolMock extends EventEmitter {
     const that = this;
     return function (parentLog, pool, clientConfiguration) {
       function wrapTransaction(targetMethodName: string) {
-        return async function (query: TaggedTemplateLiteralInvocation) {
+        return async function (query: QuerySqlToken) {
           if (typeof query === "string") {
             throw new TypeError("Query must be constructed using `sql` tagged template literal.");
           }
