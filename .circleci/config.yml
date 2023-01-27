@@ -29,7 +29,6 @@ jobs:
           fingerprints:
             - "f7:6a:1f:f9:d3:1c:05:40:ae:3c:e3:0f:9a:7e:9a:a8"
       - checkout
-      - node/install-npm
       - node/install-packages
       - run:
           name: Install Slonik v<< parameters.slonik-version >> & Mocha v<< parameters.mocha-version >>
