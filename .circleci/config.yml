@@ -124,7 +124,7 @@ workflows:
   build-and-release:
     jobs:
       - test:
-          name: test-mocha-v<< matrix.mocha-version >>-slonik-v<< matrix.slonik-version >>
+          name: test-node-v<< matrix.node-version>>-mocha-v<< matrix.mocha-version >>-slonik-v<< matrix.slonik-version >>
           context: test
           filters:
             tags:
