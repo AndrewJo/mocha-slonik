@@ -25,6 +25,9 @@ jobs:
           POSTGRES_PASSWORD: circleci_test
     working_directory: ~/mocha-slonik
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "f7:6a:1f:f9:d3:1c:05:40:ae:3c:e3:0f:9a:7e:9a:a8"
       - checkout
       - node/install-npm
       - node/install-packages
@@ -84,6 +87,19 @@ jobs:
           condition: << pipeline.git.tag >>
           steps:
             - run: npm publish --dry-run
+  release:
+    docker:
+      - image: cimg/node:lts
+    working_directory: ~/mocha-slonik
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "f7:6a:1f:f9:d3:1c:05:40:ae:3c:e3:0f:9a:7e:9a:a8"
+      - checkout
+      - node/install-packages
+      - run:
+          name: Run semantic-release
+          command: npm run semantic-release
 
 workflows:
   build-and-publish:
@@ -98,18 +114,7 @@ workflows:
             parameters:
               mocha-version: ["10"]
               slonik-version: ["30", "31", "32"]
-      - build:
-          requires:
-            - test
-          filters:
-            tags:
-              only: /v\d+(?:\.\d+){0,2}(?:-\w+(?:\.\w+)*){0,1}/
-      - publish:
+      - release:
           context: npm
           requires:
-            - build
-          filters:
-            branches:
-              only: master
-            tags:
-              only: /v\d+(?:\.\d+){0,2}(?:-\w+(?:\.\w+)*){0,1}/
+            - test
