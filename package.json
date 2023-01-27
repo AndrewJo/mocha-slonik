@@ -1,6 +1,6 @@
 {
   "name": "mocha-slonik",
-  "version": "5.0.1",
+  "version": "0.0.0-development",
   "description": "Slonik transaction support for Mocha test framework",
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",
@@ -19,11 +19,12 @@
     "test:factories": "mocha tests/factories/**/*.spec.ts",
     "pretest:rootHookPlugin": "npm run build",
     "test:rootHookPlugin": "mocha tests/rootHookPlugin/**/*.spec.ts",
-    "test:coverage": "nyc npm test"
+    "test:coverage": "nyc npm test",
+    "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AndrewJo/mocha-slonik.git"
+    "url": "https://github.com/AndrewJo/mocha-slonik.git"
   },
   "keywords": [
     "nodejs",
