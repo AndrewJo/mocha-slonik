@@ -11,6 +11,10 @@ orbs:
 jobs:
   test:
     parameters:
+      node-version:
+        default: "lts"
+        description: The target version of Node.js to run tests against.
+        type: string
       mocha-version:
         default: "9"
         description: The target version of Mocha to run tests against.
@@ -19,7 +23,7 @@ jobs:
         description: The target version of Slonik to run tests against.
         type: string
     docker:
-      - image: cimg/node:lts
+      - image: cimg/node:<< parameters.node-version >>
       - image: cimg/postgres:13.8
         environment:
           POSTGRES_PASSWORD: circleci_test
@@ -127,6 +131,7 @@ workflows:
               only: /v\d+(?:\.\d+){0,2}(?:-\w+(?:\.\w+)*){0,1}/
           matrix:
             parameters:
+              node-version: ["14.21", "16.19", "18.13"]
               mocha-version: ["10"]
               slonik-version: ["33"]
       - release:
