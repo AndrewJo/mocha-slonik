@@ -52,6 +52,7 @@
     "ts-mock-imports": "^1.3.8"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.2",
     "@types/chai": "^4.2.22",
     "@types/chai-as-promised": "^7.1.4",
     "@types/mocha": "^9.0.0",
