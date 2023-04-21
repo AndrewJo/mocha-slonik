@@ -81,7 +81,6 @@ export const createPool = async (
 
   // istanbul ignore next
   pool.on("connect", (client) => {
-    console.log("connecting");
     client.on("error", (error) => {
       // if (
       //   error.message.includes("Connection terminated unexpectedly") ||
