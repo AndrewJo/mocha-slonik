@@ -59,7 +59,6 @@ export const createPool = async (
       getTypeParser,
     }
   });
-  console.log(pool);
 
   poolStateMap.set(pool, {
     ended: false,
