@@ -7,6 +7,7 @@ orbs:
   # Orbs reduce the amount of configuration required for common tasks.
   # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/node
   node: circleci/node@5.0.0
+  codecov: codecov/codecov@3.2.4
 
 jobs:
   test:
@@ -38,9 +39,6 @@ jobs:
           name: Install Slonik v<< parameters.slonik-version >> & Mocha v<< parameters.mocha-version >>
           command: npm i slonik@<< parameters.slonik-version >> mocha@<< parameters.mocha-version >>
       - run:
-          name: Install Codecov
-          command: npm i -D codecov
-      - run:
           name: Compile TypeScript
           command: npm run build
       - run:
@@ -52,6 +50,8 @@ jobs:
             npx codecov
           environment:
             DATABASE_URL: postgres://postgres:circleci_test@localhost:5432/circle_test
+      - codecov/upload
+
   build:
     docker:
       - image: cimg/node:lts
