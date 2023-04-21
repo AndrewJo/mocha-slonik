@@ -1,4 +1,4 @@
-import { Pool as PgPool } from "pg";
+import { Client as PgClient, Pool as PgPool } from "pg";
 import { serializeError } from "serialize-error";
 import { Logger } from "slonik/dist/src/Logger";
 import type { ClientConfigurationInput } from "slonik/dist/src/types";
@@ -38,11 +38,20 @@ export const createPool = async (
   }
 
   // This pool is only used to initialize the client.
-  const setupPool: PgPool = new Pool(poolConfiguration);
+  const setupClient = new PgClient({
+    database: poolConfiguration.database,
+    host: poolConfiguration.host,
+    password: poolConfiguration.password,
+    port: poolConfiguration.port,
+    ssl: poolConfiguration.ssl,
+    user: poolConfiguration.user,
+  });
 
-  const getTypeParser = await createTypeOverrides(setupPool, clientConfiguration.typeParsers);
+  await setupClient.connect();
 
-  await setupPool.end();
+  const getTypeParser = await createTypeOverrides(setupClient, clientConfiguration.typeParsers);
+
+  await setupClient.end();
 
   const pool: PgPool = new Pool({
     ...poolConfiguration,
@@ -50,6 +59,7 @@ export const createPool = async (
       getTypeParser,
     }
   });
+  console.log(pool);
 
   poolStateMap.set(pool, {
     ended: false,
@@ -72,6 +82,7 @@ export const createPool = async (
 
   // istanbul ignore next
   pool.on("connect", (client) => {
+    console.log("connecting");
     client.on("error", (error) => {
       // if (
       //   error.message.includes("Connection terminated unexpectedly") ||
