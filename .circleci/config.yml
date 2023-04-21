@@ -47,7 +47,6 @@ jobs:
             npm run test:coverage
             mkdir -p coverage
             npx nyc report --reporter=json > coverage/coverage.json
-            npx codecov
           environment:
             DATABASE_URL: postgres://postgres:circleci_test@localhost:5432/circle_test
       - codecov/upload
