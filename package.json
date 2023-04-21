@@ -45,7 +45,7 @@
   "homepage": "https://github.com/AndrewJo/mocha-slonik#readme",
   "peerDependencies": {
     "mocha": "^10.1.0",
-    "slonik": "^33.0.0"
+    "slonik": ">=33.0.0 <33.1.1"
   },
   "dependencies": {
     "sinon": "^15.0.1",
