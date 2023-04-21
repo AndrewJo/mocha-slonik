@@ -1,14 +1,14 @@
 import { EventEmitter } from "events";
 import { DatabaseTransactionConnection } from "slonik";
-import { createConnection } from "slonik/dist/src/factories";
-import { getPoolState } from "slonik/dist/src/state";
+import { createConnection } from "slonik/dist/factories";
+import { getPoolState } from "slonik/dist/state";
 import type { Pool } from "pg";
 import type {
   ClientConfiguration,
   Logger,
   PoolState,
   QuerySqlToken,
-} from "slonik/dist/src/types";
+} from "slonik/dist/types";
 import type { BindPoolFunction } from "mocha-slonik/types";
 
 export class BindPoolMock extends EventEmitter {

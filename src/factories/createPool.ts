@@ -1,14 +1,14 @@
 import { Client as PgClient, Pool as PgPool } from "pg";
 import { serializeError } from "serialize-error";
-import { Logger } from "slonik/dist/src/Logger";
-import type { ClientConfigurationInput } from "slonik/dist/src/types";
-import { createUid } from "slonik/dist/src/utilities";
-import { createClientConfiguration } from "slonik/dist/src/factories/createClientConfiguration";
-import { createPoolConfiguration } from "slonik/dist/src/factories/createPoolConfiguration";
-import { createTypeOverrides } from "slonik/dist/src/routines";
+import { Logger } from "slonik/dist/Logger";
+import type { ClientConfigurationInput } from "slonik/dist/types";
+import { createUid } from "slonik/dist/utilities";
+import { createClientConfiguration } from "slonik/dist/factories/createClientConfiguration";
+import { createPoolConfiguration } from "slonik/dist/factories/createPoolConfiguration";
+import { createTypeOverrides } from "slonik/dist/routines";
 import { BindPoolMock } from "mocha-slonik/binders/bindPoolMock";
 import type { DatabasePool } from "mocha-slonik/types";
-import { poolStateMap } from "slonik/dist/src/state";
+import { poolStateMap } from "slonik/dist/state";
 
 /**
  * @param connectionUri PostgreSQL [Connection URI](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING).

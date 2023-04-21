@@ -5,7 +5,7 @@ import type {
   Logger,
   DatabasePool as BaseDatabasePool,
   DatabaseTransactionConnection,
-} from "slonik/dist/src/types";
+} from "slonik/dist/types";
 
 export type DatabasePool = BaseDatabasePool & {
   get currentTransaction(): DatabaseTransactionConnection;
