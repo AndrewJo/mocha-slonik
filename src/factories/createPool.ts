@@ -1,14 +1,15 @@
 import { Client as PgClient, Pool as PgPool } from "pg";
+import type pgTypes from "pg-types";
 import { serializeError } from "serialize-error";
-import { Logger } from "slonik/dist/src/Logger";
-import type { ClientConfigurationInput } from "slonik/dist/src/types";
-import { createUid } from "slonik/dist/src/utilities";
-import { createClientConfiguration } from "slonik/dist/src/factories/createClientConfiguration";
-import { createPoolConfiguration } from "slonik/dist/src/factories/createPoolConfiguration";
-import { createTypeOverrides } from "slonik/dist/src/routines";
+import { Logger } from "slonik/dist/Logger";
+import type { ClientConfigurationInput } from "slonik/dist/types";
+import { createUid } from "slonik/dist/utilities";
+import { createClientConfiguration } from "slonik/dist/factories/createClientConfiguration";
+import { createPoolConfiguration } from "slonik/dist/factories/createPoolConfiguration";
+import { createTypeOverrides } from "slonik/dist/routines";
 import { BindPoolMock } from "mocha-slonik/binders/bindPoolMock";
 import type { DatabasePool } from "mocha-slonik/types";
-import { poolStateMap } from "slonik/dist/src/state";
+import { poolStateMap } from "slonik/dist/state";
 
 /**
  * @param connectionUri PostgreSQL [Connection URI](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING).
@@ -47,11 +48,16 @@ export const createPool = async (
     user: poolConfiguration.user,
   });
 
-  await setupClient.connect();
-
-  const getTypeParser = await createTypeOverrides(setupClient, clientConfiguration.typeParsers);
-
-  await setupClient.end();
+  let getTypeParser: typeof pgTypes.getTypeParser;
+  try {
+    await setupClient.connect();
+    getTypeParser = await createTypeOverrides(
+      setupClient,
+      clientConfiguration.typeParsers
+    );
+  } finally {
+    await setupClient.end();
+  }
 
   const pool: PgPool = new Pool({
     ...poolConfiguration,
@@ -106,7 +112,6 @@ export const createPool = async (
 
     poolLog.debug(
       {
-        processId: client.processID,
         stats: {
           idleConnectionCount: pool.idleCount,
           totalConnectionCount: pool.totalCount,
@@ -118,10 +123,9 @@ export const createPool = async (
   });
 
   // istanbul ignore next
-  pool.on("acquire", (client) => {
+  pool.on("acquire", () => {
     poolLog.debug(
       {
-        processId: client.processID,
         stats: {
           idleConnectionCount: pool.idleCount,
           totalConnectionCount: pool.totalCount,
@@ -133,10 +137,9 @@ export const createPool = async (
   });
 
   // istanbul ignore next
-  pool.on("remove", (client) => {
+  pool.on("remove", () => {
     poolLog.debug(
       {
-        processId: client.processID,
         stats: {
           idleConnectionCount: pool.idleCount,
           totalConnectionCount: pool.totalCount,
