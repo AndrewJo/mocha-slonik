@@ -2,7 +2,7 @@ import { EventEmitter } from "events";
 import { DatabaseTransactionConnection } from "slonik";
 import { createConnection } from "slonik/dist/factories";
 import { getPoolState } from "slonik/dist/state";
-import type { Pool } from "pg";
+import type { Pool as PgPool } from "pg";
 import type {
   ClientConfiguration,
   Logger,
@@ -16,7 +16,7 @@ export class BindPoolMock extends EventEmitter {
 
   protected getOrCreateTransaction(
     parentLog: Logger,
-    pool: Pool,
+    pool: PgPool,
     clientConfiguration: ClientConfiguration
   ): Promise<DatabaseTransactionConnection> {
     return new Promise(async (resolve, reject) => {
@@ -105,31 +105,10 @@ export class BindPoolMock extends EventEmitter {
         },
         async end() {
           const poolState = getPoolState(pool);
-          const terminateIdleClients = () => {
-            const activeConnectionCount = pool.totalCount - pool.idleCount;
-
-            if (activeConnectionCount === 0) {
-              for (const client of pool._clients) {
-                pool._remove(client);
-              }
-            }
-          };
 
           poolState.ended = true;
 
-          return new Promise((resolve) => {
-            terminateIdleClients();
-
-            pool.on("remove", () => {
-              if (pool.totalCount === 0) {
-                resolve();
-              }
-            });
-
-            if (pool.totalCount === 0) {
-              resolve();
-            }
-          });
+          await pool.end();
         },
         exists: wrapTransaction("exists"),
         getPoolState(): PoolState {
