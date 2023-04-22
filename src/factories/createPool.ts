@@ -1,4 +1,5 @@
 import { Client as PgClient, Pool as PgPool } from "pg";
+import type pgTypes from "pg-types";
 import { serializeError } from "serialize-error";
 import { Logger } from "slonik/dist/Logger";
 import type { ClientConfigurationInput } from "slonik/dist/types";
@@ -47,11 +48,16 @@ export const createPool = async (
     user: poolConfiguration.user,
   });
 
-  await setupClient.connect();
-
-  const getTypeParser = await createTypeOverrides(setupClient, clientConfiguration.typeParsers);
-
-  await setupClient.end();
+  let getTypeParser: typeof pgTypes.getTypeParser;
+  try {
+    await setupClient.connect();
+    getTypeParser = await createTypeOverrides(
+      setupClient,
+      clientConfiguration.typeParsers
+    );
+  } finally {
+    await setupClient.end();
+  }
 
   const pool: PgPool = new Pool({
     ...poolConfiguration,
