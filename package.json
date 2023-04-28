@@ -52,7 +52,7 @@
     "ts-mock-imports": "^1.3.8"
   },
   "devDependencies": {
-    "@semantic-release/changelog": "^6.0.2",
+    "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@types/chai": "^4.2.22",
     "@types/chai-as-promised": "^7.1.4",
@@ -70,7 +70,7 @@
     "nyc": "^15.1.0",
     "pg": "^8.7.1",
     "prettier": "^2.4.1",
-    "semantic-release": "^20.1.0",
+    "semantic-release": "^21.0.1",
     "slonik": "^33.3.1",
     "ts-node": "^10.9.1",
     "ts-patch": "^1.4.5",
