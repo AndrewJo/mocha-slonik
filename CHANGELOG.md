@@ -1,3 +1,10 @@
+## [7.0.1](https://github.com/AndrewJo/mocha-slonik/compare/v7.0.0...v7.0.1) (2023-06-06)
+
+
+### Bug Fixes
+
+* upgrade sinon from 15.0.3 to 15.0.4 ([#20](https://github.com/AndrewJo/mocha-slonik/issues/20)) ([31d5266](https://github.com/AndrewJo/mocha-slonik/commit/31d5266352b36d8951db28baffebca0da438255e))
+
 # [7.0.0](https://github.com/AndrewJo/mocha-slonik/compare/v6.0.1...v7.0.0) (2023-04-22)
 
 
