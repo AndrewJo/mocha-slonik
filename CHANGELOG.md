@@ -1,3 +1,13 @@
+# [8.0.0](https://github.com/AndrewJo/mocha-slonik/compare/v7.0.1...v8.0.0) (2023-09-29)
+
+
+* chore!: update supported Slonik version to ≥34.0.0 <35 (#23) ([1f4d4e4](https://github.com/AndrewJo/mocha-slonik/commit/1f4d4e410810230fb511ce6a7ced7019924d24c9)), closes [#23](https://github.com/AndrewJo/mocha-slonik/issues/23)
+
+
+### BREAKING CHANGES
+
+* copyFromBinary has been removed and Node.js v16 support has been dropped.
+
 ## [7.0.1](https://github.com/AndrewJo/mocha-slonik/compare/v7.0.0...v7.0.1) (2023-06-06)
 
 
