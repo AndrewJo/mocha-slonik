@@ -582,9 +582,11 @@ this library.
 
 ### Lack of `copyFromBinary` support
 
-Due to the lack of support for transactions in `copyFromBinary` method and
+~~Due to the lack of support for transactions in `copyFromBinary` method and
 [the potential for being deprecated in the future versions][slonik-issue-161], calling
-`copyFromBinary` will immediately reject with an error message.
+`copyFromBinary` will immediately reject with an error message.~~
+
+`copyFromBinary` support has been [officially removed in Slonik starting from v34.0.0][slonik-copy-from-binary]. This library no longer contains `copyFromBinary` function starting from v8.
 
 [npm]: https://www.npmjs.com/package/mocha-slonik
 [circleci]: https://circleci.com/gh/AndrewJo/mocha-slonik/tree/master
@@ -595,5 +597,6 @@ Due to the lack of support for transactions in `copyFromBinary` method and
 [slonik]: https://github.com/gajus/slonik
 [slonik-query-methods]: https://github.com/gajus/slonik#slonik-query-methods
 [slonik-issue-161]: https://github.com/gajus/slonik/issues/161#issuecomment-604770259
+[slonik-copy-from-binary]: https://github.com/gajus/slonik/releases/tag/v34.0.0
 [semver]: https://semver.org/
 [dry]: https://en.wikipedia.org/wiki/Don%27t_repeat_yourself
