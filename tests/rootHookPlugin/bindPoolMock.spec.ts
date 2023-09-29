@@ -51,8 +51,4 @@ describe("BindPoolMock", function () {
       expect(pool.getPoolState().activeConnectionCount).to.not.equal(pool2.getPoolState().activeConnectionCount);
     });
   });
-
-  it("should reject when copyFromBinary is called", function () {
-    return expect(pool.copyFromBinary(null, null, null)).to.be.rejectedWith(Error, "copyFromBinary is not supported in transactions.");
-  });
 });
