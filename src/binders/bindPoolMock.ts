@@ -1,15 +1,16 @@
 import { EventEmitter } from "events";
-import { DatabaseTransactionConnection } from "slonik";
-import { createConnection } from "slonik/dist/factories";
+import { DatabasePool, DatabaseTransactionConnection } from "slonik";
+import { createConnection } from "slonik/dist/factories/createConnection";
 import { getPoolState } from "slonik/dist/state";
 import type { Pool as PgPool } from "pg";
 import type {
   ClientConfiguration,
   Logger,
-  PoolState,
   QuerySqlToken,
 } from "slonik/dist/types";
 import type { BindPoolFunction } from "mocha-slonik/types";
+
+type PoolState = ReturnType<DatabasePool["getPoolState"]>;
 
 export class BindPoolMock extends EventEmitter {
   protected transaction: DatabaseTransactionConnection;
@@ -96,9 +97,6 @@ export class BindPoolMock extends EventEmitter {
             clientConfiguration
           );
           return connectionHandler(transaction);
-        },
-        async copyFromBinary(_copyQuery, _values, _columnTypes): Promise<Record<string, unknown>> {
-          throw new Error("copyFromBinary is not supported in transactions.");
         },
         get currentTransaction() {
           return that.transaction;
