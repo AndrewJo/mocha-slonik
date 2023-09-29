@@ -138,9 +138,9 @@ workflows:
               only: /v\d+(?:\.\d+){0,2}(?:-\w+(?:\.\w+)*){0,1}/
           matrix:
             parameters:
-              node-version: ["14.21", "16.19", "18.13"]
+              node-version: ["16.20", "18.18"]
               mocha-version: ["10"]
-              slonik-version: ["33.3.1"]
+              slonik-version: ["34.3.0"]
       - release:
           context:
             - npm
