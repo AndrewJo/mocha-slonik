@@ -10,6 +10,8 @@
 
 ## Table of Contents
 
+- [Why does mocha-slonik exist?](#why-does-mocha-slonik-exist)
+  - [Slonik’s `createMockPool` vs `mocha-slonik`](#sloniks-createmockpool-vs-mocha-slonik)
 - [How it works](#how-it-works)
 - [Version compatibility](#version-compatibility)
 - [Installation](#installation)
@@ -26,6 +28,23 @@
 - [Running tests](#running-tests)
 - [Limitations](#limitations)
   - [Lack of `copyFromBinary` support](#lack-of-copyfrombinary-support)
+
+## Why does mocha-slonik exist?
+
+This package exists as a way for developers to **run integration tests against a real database
+without having to worry about cleaning up the test data after each test**. Since each test cases
+are wrapped in its own transaction that is automatically rolled back, you can ensure that your
+tests are isolated from each other: an earlier test that affects a row does not affect subsequent
+tests that may depend on the same row.
+
+### Slonik’s `createMockPool` vs `mocha-slonik`
+
+[Slonik][slonik] already provides a way to mock queries against the database by using a combination
+of `createMockPool` and `createMockQueryResult`. This is usually sufficient for lightweight unit
+testing individual functions that calls Slonik query methods and is great for running tests that
+does not need a running instance of PostgreSQL.
+
+See: [Mocking Slonik][slonik-user-content-mocking-slonik]
 
 ## How it works
 
@@ -596,6 +615,7 @@ this library.
 [root-hook-plugin]: https://mochajs.org/#root-hook-plugins
 [ts-mock-imports]: https://github.com/EmandM/ts-mock-imports
 [slonik]: https://github.com/gajus/slonik
+[slonik-user-content-mocking-slonik]: https://github.com/gajus/slonik#user-content-mocking-slonik
 [slonik-query-methods]: https://github.com/gajus/slonik#slonik-query-methods
 [slonik-issue-161]: https://github.com/gajus/slonik/issues/161#issuecomment-604770259
 [slonik-copy-from-binary]: https://github.com/gajus/slonik/releases/tag/v34.0.0
