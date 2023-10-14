@@ -140,7 +140,7 @@ workflows:
             parameters:
               node-version: ["16.20", "18.18"]
               mocha-version: ["10"]
-              slonik-version: ["34.3.0"]
+              slonik-version: ["35.2.1", "36.0.0", "37.0.1"]
       - release:
           context:
             - npm
