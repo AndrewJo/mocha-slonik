@@ -1,3 +1,13 @@
+# [9.0.0](https://github.com/AndrewJo/mocha-slonik/compare/v8.0.0...v9.0.0) (2023-10-16)
+
+
+* chore!: update supported Slonik version to ≥35.0.0 <38 (#24) ([1830b68](https://github.com/AndrewJo/mocha-slonik/commit/1830b68a6a0e0209553c0d83a27b3bbeed2cf7e0)), closes [#24](https://github.com/AndrewJo/mocha-slonik/issues/24)
+
+
+### BREAKING CHANGES
+
+* Drops support for Slonik v34 and earlier.
+
 # [8.0.0](https://github.com/AndrewJo/mocha-slonik/compare/v7.0.1...v8.0.0) (2023-09-29)
 
 
