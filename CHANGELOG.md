@@ -1,3 +1,10 @@
+## [9.0.1](https://github.com/AndrewJo/mocha-slonik/compare/v9.0.0...v9.0.1) (2024-06-11)
+
+
+### Bug Fixes
+
+* upgrade ts-mock-imports from 1.3.8 to 1.3.16 ([#27](https://github.com/AndrewJo/mocha-slonik/issues/27)) ([13b5fb6](https://github.com/AndrewJo/mocha-slonik/commit/13b5fb623284335abae2e12b640073be893a6a1e))
+
 # [9.0.0](https://github.com/AndrewJo/mocha-slonik/compare/v8.0.0...v9.0.0) (2023-10-16)
 
 
