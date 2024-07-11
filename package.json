@@ -1,6 +1,6 @@
 {
   "name": "mocha-slonik",
-  "version": "9.0.1",
+  "version": "9.0.2",
   "description": "Slonik transaction support for Mocha test framework",
   "main": "dist/index.js",
   "types": "./dist/index.d.ts",
