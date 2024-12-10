@@ -1,3 +1,10 @@
+## [9.0.3](https://github.com/AndrewJo/mocha-slonik/compare/v9.0.2...v9.0.3) (2024-12-10)
+
+
+### Bug Fixes
+
+* package.json & package-lock.json to reduce vulnerabilities ([#30](https://github.com/AndrewJo/mocha-slonik/issues/30)) ([5c673fc](https://github.com/AndrewJo/mocha-slonik/commit/5c673fc77410e1732fde569a9e72447a3b91e483))
+
 ## [9.0.2](https://github.com/AndrewJo/mocha-slonik/compare/v9.0.1...v9.0.2) (2024-07-11)
 
 
